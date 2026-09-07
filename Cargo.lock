@@ -9074,6 +9074,7 @@ dependencies = [
  "http 1.4.0",
  "insta",
  "libc",
+ "openssl-sys",
  "os_info",
  "owo-colors",
  "predicates",
