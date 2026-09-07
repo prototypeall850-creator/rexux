@@ -57,8 +57,10 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/.ndk-shims"
           for triple in aarch64-linux-android x86_64-linux-android; do
             ln -sf "$BIN_DIR/${triple}35-clang" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-clang"
-            ln -sf "$BIN_DIR/${triple}-clang" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-clang++" 2>/dev/null || true
+            ln -sf "$BIN_DIR/${triple}35-clang++" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-clang++"
             ln -sf "$BIN_DIR/llvm-ar" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-ar"
+            ln -sf "$BIN_DIR/llvm-ranlib" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-ranlib"
+            ln -sf "$BIN_DIR/llvm-strip" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-strip"
           done
           echo "$GITHUB_WORKSPACE/.ndk-shims" >> "$GITHUB_PATH"
         env:
