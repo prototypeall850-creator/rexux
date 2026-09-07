@@ -394,7 +394,7 @@ checksum = "2a4385e2e34eb35d6b3efe798b9eb88096925d87726c0798709bf56d9ed84af3"
 
 [[package]]
 name = "app_test_support"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -1931,7 +1931,7 @@ checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
 name = "core_test_support"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "assert_cmd",
@@ -6042,7 +6042,7 @@ dependencies = [
 
 [[package]]
 name = "mcp_test_support"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "core_test_support",
@@ -8544,7 +8544,7 @@ checksum = "1e061d1b48cb8d38042de4ae0a7a6401009d6143dc80d2e2d6f31f0bdd6470c7"
 
 [[package]]
 name = "rexux-agent-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "core_test_support",
@@ -8556,7 +8556,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-agent-graph-store"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-protocol",
@@ -8571,7 +8571,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-agent-identity"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -8591,7 +8591,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-agent-roles"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-config",
  "rexux-file-system",
@@ -8604,7 +8604,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-analytics"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "os_info",
  "pretty_assertions",
@@ -8625,7 +8625,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-ansi-escape"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "ansi-to-tui",
  "ratatui",
@@ -8634,7 +8634,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-api"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "assert_matches",
@@ -8669,7 +8669,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "app_test_support",
@@ -8771,7 +8771,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "futures",
  "pretty_assertions",
@@ -8798,7 +8798,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server-daemon"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "futures",
@@ -8819,7 +8819,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server-protocol"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "inventory",
@@ -8853,11 +8853,11 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server-protocol-noop-macros"
-version = "0.153.4"
+version = "0.1.0"
 
 [[package]]
 name = "rexux-app-server-test-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -8879,7 +8879,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-app-server-transport"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
@@ -8921,7 +8921,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-apply-patch"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "assert_cmd",
@@ -8941,7 +8941,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-arg0"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "dotenvy",
@@ -8963,7 +8963,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-async-utils"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "tokio",
@@ -8972,7 +8972,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-aws-auth"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "aws-config",
  "aws-credential-types",
@@ -8987,7 +8987,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-backend-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "http 1.4.0",
@@ -9007,7 +9007,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-backend-openapi-models"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -9016,7 +9016,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-build-info"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-install-context",
@@ -9028,7 +9028,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-bwrap"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "cc",
  "libc",
@@ -9037,7 +9037,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-chatgpt"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -9059,7 +9059,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-cli"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "app_test_support",
@@ -9149,7 +9149,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "eventsource-stream",
  "futures",
@@ -9162,7 +9162,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-cloud-config"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -9187,7 +9187,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-cloud-tasks"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -9220,7 +9220,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-cloud-tasks-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -9235,7 +9235,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-cloud-tasks-mock-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "chrono",
  "diffy",
@@ -9244,7 +9244,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-code-mode"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "futures",
  "http-body-util",
@@ -9267,7 +9267,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-code-mode-protocol"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "glob",
  "pretty_assertions",
@@ -9285,11 +9285,11 @@ dependencies = [
 
 [[package]]
 name = "rexux-collaboration-mode-templates"
-version = "0.153.4"
+version = "0.1.0"
 
 [[package]]
 name = "rexux-config"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -9338,7 +9338,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-config-schema"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -9347,7 +9347,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-connectors"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "arc-swap",
@@ -9369,7 +9369,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-connectors-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-connectors",
  "rexux-core-plugins",
@@ -9383,7 +9383,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-context-fragments"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-protocol",
  "rexux-utils-string",
@@ -9391,7 +9391,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-core"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "arc-swap",
@@ -9525,7 +9525,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-core-api"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-analytics",
  "rexux-app-server-protocol",
@@ -9548,7 +9548,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-core-plugins"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -9604,7 +9604,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-diagnostics"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "libc",
  "pretty_assertions",
@@ -9612,7 +9612,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-exec"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "assert_cmd",
@@ -9661,7 +9661,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-exec-server"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "arc-swap",
@@ -9720,7 +9720,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-exec-server-protocol"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "pretty_assertions",
@@ -9735,7 +9735,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-exec-server-test-support"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "futures",
@@ -9750,7 +9750,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-execpolicy"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -9768,7 +9768,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-experimental-api-macros"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -9777,7 +9777,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-extension-api"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-config",
@@ -9794,7 +9794,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-extension-items"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-utils-absolute-path",
@@ -9806,7 +9806,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-external-agent-migration"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "chrono",
  "pretty_assertions",
@@ -9836,7 +9836,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-features"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-otel",
@@ -9849,7 +9849,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-feedback"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "bytes",
@@ -9871,7 +9871,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-file-search"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -9887,7 +9887,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-file-system"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "bytes",
  "futures",
@@ -9899,7 +9899,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-file-watcher"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "notify",
  "pretty_assertions",
@@ -9910,7 +9910,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-git-attribution"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-backend-client",
  "rexux-extension-api",
@@ -9923,7 +9923,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-git-utils"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -9949,7 +9949,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-goal-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -9973,7 +9973,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-guardian-context"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-protocol",
@@ -9982,7 +9982,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-guardian-v2"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "core_test_support",
@@ -10012,7 +10012,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-history"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "pretty_assertions",
@@ -10024,7 +10024,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-history-notes-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "core_test_support",
  "http 1.4.0",
@@ -10048,7 +10048,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-home"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-extension-api",
@@ -10059,7 +10059,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-hooks"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-channel",
@@ -10085,7 +10085,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-http-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "bytes",
  "futures",
@@ -10117,7 +10117,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-image-generation-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "http 1.4.0",
@@ -10144,7 +10144,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-install-context"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-utils-absolute-path",
@@ -10157,7 +10157,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-keyring-store"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-utils-home-dir",
  "serde_json",
@@ -10166,7 +10166,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-linux-sandbox"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "clap",
  "globset",
@@ -10193,7 +10193,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-lmstudio"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-core",
  "rexux-http-client",
@@ -10207,7 +10207,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-login"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -10245,7 +10245,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-mcp"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "arc-swap",
@@ -10285,7 +10285,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-mcp-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
@@ -10316,7 +10316,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-mcp-server"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "app_test_support",
@@ -10355,7 +10355,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-memories-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-core",
@@ -10376,7 +10376,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-memories-read"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-protocol",
@@ -10386,7 +10386,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-memories-write"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -10423,7 +10423,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-message-history"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "memchr",
  "pretty_assertions",
@@ -10437,7 +10437,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-model-provider"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "http 1.4.0",
  "pretty_assertions",
@@ -10461,7 +10461,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-model-provider-info"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "http 1.4.0",
  "maplit",
@@ -10478,7 +10478,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-models-manager"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "chrono",
  "pretty_assertions",
@@ -10498,7 +10498,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-network-proxy"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -10536,7 +10536,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-ollama"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "assert_matches",
  "async-stream",
@@ -10556,7 +10556,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-otel"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "chrono",
  "eventsource-stream",
@@ -10589,7 +10589,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-otel-trace-websocket"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
@@ -10600,7 +10600,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-plugin"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-config",
@@ -10614,7 +10614,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-process-hardening"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "libc",
  "pretty_assertions",
@@ -10622,7 +10622,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-prompts"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "pretty_assertions",
@@ -10636,7 +10636,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-protocol"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chardetng",
@@ -10680,7 +10680,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-queue-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "core_test_support",
@@ -10701,7 +10701,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-response-debug-context"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "http 1.4.0",
@@ -10712,7 +10712,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-responses-api-proxy"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -10729,7 +10729,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-rmcp-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "axum",
@@ -10774,7 +10774,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-rollout"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -10801,7 +10801,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-rollout-trace"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "http 1.4.0",
@@ -10817,7 +10817,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-sandboxing"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "appcontainer_common",
@@ -10844,7 +10844,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-secrets"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "age",
  "anyhow",
@@ -10864,7 +10864,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-shell-command"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -10887,7 +10887,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-shell-escalation"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -10907,7 +10907,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-skills"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "include_dir",
  "pretty_assertions",
@@ -10924,7 +10924,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-skills-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "assert_matches",
  "dirs",
@@ -10961,7 +10961,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-state"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -10985,7 +10985,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-stdio-to-uds"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "pretty_assertions",
@@ -10997,7 +10997,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-terminal-detection"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "tracing",
@@ -11005,7 +11005,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-test-binary-support"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-arg0",
  "tempfile",
@@ -11013,7 +11013,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-thread-manager-sample"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -11024,7 +11024,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-thread-store"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "chrono",
  "futures",
@@ -11054,7 +11054,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-tools"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "bitflags 2.13.1",
  "jsonptr",
@@ -11079,7 +11079,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-tui"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "app_test_support",
@@ -11192,7 +11192,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-uds"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "async-io",
  "pretty_assertions",
@@ -11204,7 +11204,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-absolute-path"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "dirs",
  "dunce",
@@ -11218,14 +11218,14 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-approval-presets"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-protocol",
 ]
 
 [[package]]
 name = "rexux-utils-audio"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "pretty_assertions",
@@ -11239,7 +11239,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-cache"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "lru",
  "sha1 0.10.6",
@@ -11248,7 +11248,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-cargo-bin"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "assert_cmd",
  "runfiles",
@@ -11257,7 +11257,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-cli"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "clap",
  "pretty_assertions",
@@ -11269,15 +11269,15 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-elapsed"
-version = "0.153.4"
+version = "0.1.0"
 
 [[package]]
 name = "rexux-utils-fuzzy-match"
-version = "0.153.4"
+version = "0.1.0"
 
 [[package]]
 name = "rexux-utils-git-discovery"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "futures",
  "pretty_assertions",
@@ -11290,7 +11290,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-home-dir"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "dirs",
  "pretty_assertions",
@@ -11300,7 +11300,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-image"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "divan",
@@ -11313,7 +11313,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-json-to-toml"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "serde_json",
@@ -11322,7 +11322,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-oss"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-core",
  "rexux-lmstudio",
@@ -11332,7 +11332,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-output-truncation"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-protocol",
@@ -11341,7 +11341,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-path"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "dunce",
  "pretty_assertions",
@@ -11351,7 +11351,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-path-uri"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
  "pretty_assertions",
@@ -11367,7 +11367,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-plugins"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rexux-exec-server",
  "rexux-exec-server-protocol",
@@ -11381,7 +11381,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-pty"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "filedescriptor",
@@ -11397,7 +11397,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-readiness"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "assert_matches",
  "thiserror 2.0.18",
@@ -11407,7 +11407,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-redacted-string"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "schemars 0.8.22",
  "serde",
@@ -11415,14 +11415,14 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-rustls-provider"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "rustls",
 ]
 
 [[package]]
 name = "rexux-utils-sandbox-summary"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-protocol",
@@ -11431,7 +11431,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-sleep-inhibitor"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "core-foundation 0.9.4",
  "libc",
@@ -11441,14 +11441,14 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-stream-parser"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
 ]
 
 [[package]]
 name = "rexux-utils-string"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "regex-lite",
@@ -11458,14 +11458,14 @@ dependencies = [
 
 [[package]]
 name = "rexux-utils-template"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
 ]
 
 [[package]]
 name = "rexux-web-search-extension"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "http 1.4.0",
  "pretty_assertions",
@@ -11486,7 +11486,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-websocket-client"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "futures",
  "pretty_assertions",
@@ -11502,7 +11502,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-windows-sandbox"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -11528,7 +11528,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-workload-identity"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "pretty_assertions",
  "rexux-http-client",
@@ -11543,7 +11543,7 @@ dependencies = [
 
 [[package]]
 name = "rexux-worktree"
-version = "0.153.4"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "dunce",

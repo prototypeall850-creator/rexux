@@ -1,0 +1,66 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-android:
+    name: build ${{ matrix.target }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: aarch64-linux-android
+            arch: arm64
+          - target: x86_64-linux-android
+            arch: x86
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: install Android NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r27
+          link-to-sdk: true
+
+      - name: configure cargo NDK linkers
+        run: |
+          {
+            echo "[target.aarch64-linux-android]";
+            echo "linker = \"${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang\"";
+            echo "[target.x86_64-linux-android]";
+            echo "linker = \"${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android35-clang\"";
+          } >> "$GITHUB_WORKSPACE/.cargo-ndk-linkers.toml"
+          mkdir -p ~/.cargo
+          cat "$GITHUB_WORKSPACE/.cargo-ndk-linkers.toml" >> ~/.cargo/config.toml
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: build rexux (${{ matrix.target }})
+        run: cargo build --release -p rexux-cli --target ${{ matrix.target }}
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: stage asset
+        run: |
+          cp "target/${{ matrix.target }}/release/rexux" \
+             "rexux-${{ github.ref_name }}-${{ matrix.target }}"
+          chmod +x "rexux-${{ github.ref_name }}-${{ matrix.target }}"
+
+      - name: upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: rexux-${{ github.ref_name }}-${{ matrix.target }}
+          generate_release_notes: true
