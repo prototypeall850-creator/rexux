@@ -8,6 +8,7 @@ license.workspace = true
 workspace = true
 
 [dependencies]
+rexux-utils-file-lock = { workspace = true }
 anyhow = "1"
 axum = { workspace = true, default-features = false, features = [
     "http1",

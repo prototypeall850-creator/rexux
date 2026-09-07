@@ -69,7 +69,7 @@ impl RefreshCredentialLock {
         let mut reported_contention = false;
         timeout(acquire_timeout, async {
             loop {
-                match file.try_lock() {
+                match rexux_utils_file_lock::try_lock_exclusive(&file) {
                     Ok(()) => return Ok(()),
                     Err(std::fs::TryLockError::WouldBlock) => {
                         if !reported_contention {

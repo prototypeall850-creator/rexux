@@ -13,6 +13,7 @@ path = "src/lib.rs"
 workspace = true
 
 [dependencies]
+rexux-utils-file-lock = { workspace = true }
 anyhow = { workspace = true }
 chrono = { workspace = true, features = ["serde"] }
 rexux-extension-items = { workspace = true }
