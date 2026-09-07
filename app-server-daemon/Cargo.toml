@@ -13,6 +13,7 @@ doctest = false
 workspace = true
 
 [dependencies]
+rexux-utils-file-lock = { workspace = true }
 anyhow = { workspace = true }
 rexux-app-server-protocol = { workspace = true }
 rexux-app-server-transport = { workspace = true }

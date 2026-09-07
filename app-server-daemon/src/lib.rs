@@ -828,18 +828,15 @@ fn should_reexec_updater(
 
 #[cfg(unix)]
 fn try_lock_file(file: &tokio::fs::File) -> Result<bool> {
-    use std::os::fd::AsRawFd;
-
-    let result = unsafe { libc::flock(file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) };
-    if result == 0 {
-        return Ok(true);
+    // flock(2) is unsupported on parts of Android/Termux storage; lock the
+    // underlying fd with fcntl (F_SETLK) instead of raw libc::flock.
+    // tokio::fs::File -> std File conversion is not possible by value here,
+    // so operate on the raw fd directly.
+    match rexux_utils_file_lock::try_lock_exclusive_fd(file) {
+        Ok(()) => Ok(true),
+        Err(std::fs::TryLockError::WouldBlock) => Ok(false),
+        Err(std::fs::TryLockError::Error(err)) => Err(err).context("failed to lock daemon operation"),
     }
-
-    let err = std::io::Error::last_os_error();
-    if err.raw_os_error() == Some(libc::EWOULDBLOCK) {
-        return Ok(false);
-    }
-    Err(err).context("failed to lock daemon operation")
 }
 
 #[cfg(not(unix))]

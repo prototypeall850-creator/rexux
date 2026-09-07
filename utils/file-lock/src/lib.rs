@@ -126,6 +126,80 @@ fn fcntl_shared(_file: &File) -> Result<(), TryLockError> {
     )))
 }
 
+/// Try to acquire an exclusive advisory lock on `file`, blocking until it
+/// is available. Uses the same flock-then-fcntl strategy as
+/// [`try_lock_exclusive`].
+pub fn lock_exclusive_blocking(file: &File) -> io::Result<()> {
+    match file.lock() {
+        Ok(()) => Ok(()),
+        Err(err) if is_lock_unsupported(&err) => {
+            lock_exclusive_blocking_fcntl(file)
+        }
+        Err(err) => Err(err),
+    }
+}
+
+#[cfg(unix)]
+fn lock_exclusive_blocking_fcntl(file: &File) -> io::Result<()> {
+    use rustix::fs::FlockOperation;
+    use std::os::unix::io::AsFd;
+    // Blocking fcntl exclusive lock (F_SETLKW): retry on interrupt.
+    loop {
+        match rustix::fs::fcntl_lock(file.as_fd(), FlockOperation::LockExclusive) {
+            Ok(()) => return Ok(()),
+            Err(rustix::io::Errno::INTR) => continue,
+            Err(errno) => return Err(io::Error::from(errno)),
+        }
+    }
+}
+
+#[cfg(not(unix))]
+fn lock_exclusive_blocking_fcntl(_file: &File) -> io::Result<()> {
+    Err(io::Error::new(
+        io::ErrorKind::Unsupported,
+        "fcntl file locking is only supported on unix",
+    ))
+}
+
+/// [`try_lock_exclusive`] for call sites holding a plain [`File`] reference
+/// under a different name; kept as an alias so daemon code reads naturally.
+pub fn try_lock_exclusive_std(file: &File) -> Result<(), TryLockError> {
+    try_lock_exclusive(file)
+}
+
+/// Non-blocking exclusive lock on any fd-like handle (e.g. `tokio::fs::File`),
+/// with the same flock-then-fcntl strategy as [`try_lock_exclusive`].
+#[cfg(unix)]
+pub fn try_lock_exclusive_fd<Fd: std::os::unix::io::AsFd>(fd: Fd) -> Result<(), TryLockError> {
+    use rustix::fs::FlockOperation;
+    // First try flock; fall back to fcntl when the filesystem rejects it.
+    match rustix::fs::flock(fd.as_fd(), FlockOperation::NonBlockingLockExclusive) {
+        Ok(()) => Ok(()),
+        Err(rustix::io::Errno::WOULDBLOCK) => Err(TryLockError::WouldBlock),
+        Err(rustix::io::Errno::NOSYS) | Err(rustix::io::Errno::NOTSUP) => {
+            rustix::fs::fcntl_lock(fd.as_fd(), FlockOperation::NonBlockingLockExclusive).map_err(
+                |errno| {
+                    let err = std::io::Error::from(errno);
+                    if err.kind() == std::io::ErrorKind::WouldBlock {
+                        TryLockError::WouldBlock
+                    } else {
+                        TryLockError::Error(err)
+                    }
+                },
+            )
+        }
+        Err(errno) => Err(TryLockError::Error(std::io::Error::from(errno))),
+    }
+}
+
+#[cfg(not(unix))]
+pub fn try_lock_exclusive_fd<Fd>(_fd: Fd) -> Result<(), TryLockError> {
+    Err(TryLockError::Error(std::io::Error::new(
+        std::io::ErrorKind::Unsupported,
+        "fd file locking is only supported on unix",
+    )))
+}
+
 /// Release any advisory lock held on `file`.
 ///
 /// Best-effort: releases both `flock` and `fcntl` locks so files locked via

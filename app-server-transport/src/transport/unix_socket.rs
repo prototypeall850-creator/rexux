@@ -148,7 +148,9 @@ pub async fn acquire_app_server_startup_lock(
             .read(true)
             .write(true)
             .open(startup_lock_path.as_path())?;
-        file.lock()?;
+        // flock(2) is unsupported on parts of Android/Termux storage; fall
+        // back to fcntl(2) there via the shared helper.
+        rexux_utils_file_lock::lock_exclusive_blocking(&file)?;
         Ok(AppServerStartupLock { _file: file })
     })
     .await
