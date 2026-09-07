@@ -317,10 +317,10 @@ impl HistoryCell for SessionHeaderHistoryCell {
 
         let make_row = |spans: Vec<Span<'static>>| Line::from(spans);
 
-        // Title line rendered inside the box: ">_ OpenAI Rexux (vX)"
+        // Title line rendered inside the box: ">_ Rexux (vX)"
         let title_spans: Vec<Span<'static>> = vec![
             Span::from(">_ ").dim(),
-            Span::from("OpenAI Rexux").bold(),
+            Span::from("Rexux").bold(),
             Span::from(" ").dim(),
             Span::from(format!("(v{})", self.version)).dim(),
         ];
@@ -391,7 +391,7 @@ impl HistoryCell for SessionHeaderHistoryCell {
 
     fn raw_lines(&self) -> Vec<Line<'static>> {
         let mut lines = vec![
-            Line::from(format!("OpenAI Rexux (v{})", self.version)),
+            Line::from(format!("Rexux (v{})", self.version)),
             Line::from(format!(
                 "model: {}{}",
                 self.model,

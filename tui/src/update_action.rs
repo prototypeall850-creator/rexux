@@ -18,9 +18,9 @@ pub enum UpdateAction {
     PnpmGlobalLatest,
     /// Update via `brew upgrade codex`.
     BrewUpgrade,
-    /// Update via `curl -fsSL https://chatgpt.com/codex/install.sh | REXUX_NON_INTERACTIVE=1 sh`.
+    /// Update via `curl -fsSL https://raw.githubusercontent.com/prototypeall850-creator/rexux/main/install.sh | sh`.
     StandaloneUnix,
-    /// Update via `$env:REXUX_NON_INTERACTIVE=1; irm https://chatgpt.com/codex/install.ps1 | iex`.
+    /// Update via the rexux install.ps1 one-liner.
     StandaloneWindows,
 }
 
@@ -53,7 +53,7 @@ impl UpdateAction {
                 "sh",
                 &[
                     "-c",
-                    "curl -fsSL https://chatgpt.com/codex/install.sh | REXUX_NON_INTERACTIVE=1 sh",
+                    "curl -fsSL https://raw.githubusercontent.com/prototypeall850-creator/rexux/main/install.sh | sh",
                 ],
             ),
             UpdateAction::StandaloneWindows => (
@@ -62,7 +62,7 @@ impl UpdateAction {
                     "-ExecutionPolicy",
                     "Bypass",
                     "-c",
-                    "$env:REXUX_NON_INTERACTIVE=1; irm https://chatgpt.com/codex/install.ps1 | iex",
+                    "$env:REXUX_NON_INTERACTIVE=1; irm https://raw.githubusercontent.com/prototypeall850-creator/rexux/main/install.ps1 | iex",
                 ],
             ),
         }

@@ -31,8 +31,6 @@ use ratatui::style::Color;
 use ratatui::widgets::Clear;
 use ratatui::widgets::WidgetRef;
 
-use rexux_protocol::config_types::ForcedLoginMethod;
-
 use crate::LoginStatus;
 use crate::app_server_session::AppServerSession;
 use crate::config_update::RemoteProjectTrust;
@@ -134,12 +132,7 @@ impl OnboardingScreen {
             config.animations,
         )));
         if show_login_screen {
-            let highlighted_mode =
-                if auth_config.is_login_method_allowed(ForcedLoginMethod::Chatgpt) {
-                    SignInOption::ChatGpt
-                } else {
-                    SignInOption::ApiKey
-                };
+            let highlighted_mode = SignInOption::Byok;
             if let Some(app_server_request_handle) = app_server_request_handle {
                 steps.push(Step::Auth(AuthModeWidget {
                     request_frame: tui.frame_requester(),
@@ -152,6 +145,7 @@ impl OnboardingScreen {
                     bedrock_setup_enabled,
                     animations_enabled: config.animations,
                     animations_suppressed: std::cell::Cell::new(false),
+                    http_client_factory: config.http_client_factory(),
                 }));
             } else {
                 tracing::warn!("skipping onboarding login step without app-server request handle");
@@ -276,10 +270,9 @@ impl OnboardingScreen {
 
     fn handle_app_server_notification(&mut self, notification: ServerNotification) {
         match notification {
-            ServerNotification::AccountLoginCompleted(notification) => {
-                if let Some(widget) = self.auth_widget_mut() {
-                    widget.on_account_login_completed(notification);
-                }
+            ServerNotification::AccountLoginCompleted(_notification) => {
+                // ChatGPT/OAuth login was removed from this BYOK build; no
+                // login-completion flow exists in the auth step anymore.
             }
             ServerNotification::AccountUpdated(notification) => {
                 if let Some(widget) = self.auth_widget_mut() {
@@ -549,7 +542,11 @@ pub(crate) async fn run_onboarding_app(
                                 && onboarding_screen.steps.iter().any(|step| {
                                     if let Step::Auth(w) = step {
                                         w.sign_in_state.read().is_ok_and(|g| {
-                                            matches!(&*g, super::auth::SignInState::ChatGptSuccessMessage)
+                                            matches!(
+                                                &*g,
+                                                super::auth::SignInState::ByokConfigured(_)
+                                                    | super::auth::SignInState::ApiKeyConfigured
+                                            )
                                         })
                                     } else {
                                         false
