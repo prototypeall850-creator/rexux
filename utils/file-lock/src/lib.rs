@@ -6,6 +6,11 @@
 //! on success, `Err(TryLockError::WouldBlock)` when another holder owns the
 //! lock, and `Err(TryLockError::Error(..))` for genuine I/O failures.
 //!
+//! If the filesystem supports *no* advisory locking at all (both `flock` and
+//! `fcntl` report `ENOSYS`/`EOPNOTSUPP`/`ENOLCK`), the helpers log one
+//! warning and report success rather than failing the whole command: the
+//! process still runs, just without cross-process mutual exclusion.
+//!
 //! `fcntl` (POSIX `F_SETLK`) locks are process-associated rather than
 //! open-file-description associated, so — like any advisory scheme — they only
 //! guard against *other processes*, not threads in the same process. All
@@ -13,6 +18,7 @@
 
 use std::fs::File;
 use std::io;
+use std::sync::OnceLock;
 
 /// Non-blocking lock attempt outcome, mirroring [`std::fs::TryLockError`].
 pub type TryLockError = std::fs::TryLockError;
@@ -25,7 +31,7 @@ pub fn try_lock_exclusive(file: &File) -> Result<(), TryLockError> {
     match file.try_lock() {
         Ok(()) => Ok(()),
         Err(TryLockError::WouldBlock) => Err(TryLockError::WouldBlock),
-        Err(TryLockError::Error(err)) if is_lock_unsupported(&err) => fcntl_exclusive(file),
+        Err(TryLockError::Error(err)) if is_lock_unsupported(&err) => fcntl_try_exclusive(file),
         Err(err) => Err(err),
     }
 }
@@ -36,125 +42,88 @@ pub fn try_lock_shared(file: &File) -> Result<(), TryLockError> {
     match file.try_lock_shared() {
         Ok(()) => Ok(()),
         Err(TryLockError::WouldBlock) => Err(TryLockError::WouldBlock),
-        Err(TryLockError::Error(err)) if is_lock_unsupported(&err) => fcntl_shared(file),
+        Err(TryLockError::Error(err)) if is_lock_unsupported(&err) => fcntl_try_shared(file),
         Err(err) => Err(err),
     }
 }
 
-fn is_lock_unsupported(err: &io::Error) -> bool {
-    matches!(
-        err.raw_os_error(),
-        Some(code) if code == libc_enosys() || code == libc_eopnotsupp()
-    ) || err.kind() == io::ErrorKind::Unsupported
-}
-
 #[cfg(unix)]
-fn libc_enosys() -> i32 {
-    libc_enosys_impl()
-}
-
-#[cfg(unix)]
-fn libc_eopnotsupp() -> i32 {
-    libc_eopnotsupp_impl()
-}
-
-#[cfg(not(unix))]
-fn libc_enosys() -> i32 {
-    -1
-}
-
-#[cfg(not(unix))]
-fn libc_eopnotsupp() -> i32 {
-    -1
-}
-
-#[cfg(unix)]
-fn libc_enosys_impl() -> i32 {
-    // ENOSYS value is stable across Linux/Android/libc targets.
-    38
-}
-
-#[cfg(unix)]
-fn libc_eopnotsupp_impl() -> i32 {
-    // EOPNOTSUPP value is stable across Linux/Android/libc targets.
-    95
-}
-
-#[cfg(unix)]
-fn fcntl_exclusive(file: &File) -> Result<(), TryLockError> {
-    use rustix::fs::FlockOperation;
+fn fcntl_try_exclusive(file: &File) -> Result<(), TryLockError> {
     use std::os::unix::io::AsFd;
-    rustix::fs::fcntl_lock(file.as_fd(), FlockOperation::NonBlockingLockExclusive).map_err(
-        |errno| {
-            let err = io::Error::from(errno);
-            if err.kind() == io::ErrorKind::WouldBlock {
-                TryLockError::WouldBlock
-            } else {
-                TryLockError::Error(err)
-            }
-        },
+    fcntl_try_lock(
+        file.as_fd(),
+        rustix::fs::FlockOperation::NonBlockingLockExclusive,
     )
 }
 
+#[cfg(not(unix))]
+fn fcntl_try_exclusive(_file: &File) -> Result<(), TryLockError> {
+    Err(TryLockError::Error(io::Error::new(
+        io::ErrorKind::Unsupported,
+        "fcntl file locking is only supported on unix",
+    )))
+}
+
 #[cfg(unix)]
-fn fcntl_shared(file: &File) -> Result<(), TryLockError> {
-    use rustix::fs::FlockOperation;
+fn fcntl_try_shared(file: &File) -> Result<(), TryLockError> {
     use std::os::unix::io::AsFd;
-    rustix::fs::fcntl_lock(file.as_fd(), FlockOperation::NonBlockingLockShared).map_err(|errno| {
-        let err = io::Error::from(errno);
-        if err.kind() == io::ErrorKind::WouldBlock {
-            TryLockError::WouldBlock
-        } else {
-            TryLockError::Error(err)
-        }
-    })
+    fcntl_try_lock(
+        file.as_fd(),
+        rustix::fs::FlockOperation::NonBlockingLockShared,
+    )
 }
 
 #[cfg(not(unix))]
-fn fcntl_exclusive(_file: &File) -> Result<(), TryLockError> {
+fn fcntl_try_shared(_file: &File) -> Result<(), TryLockError> {
     Err(TryLockError::Error(io::Error::new(
         io::ErrorKind::Unsupported,
         "fcntl file locking is only supported on unix",
     )))
 }
 
-#[cfg(not(unix))]
-fn fcntl_shared(_file: &File) -> Result<(), TryLockError> {
-    Err(TryLockError::Error(io::Error::new(
-        io::ErrorKind::Unsupported,
-        "fcntl file locking is only supported on unix",
-    )))
-}
-
-/// Try to acquire an exclusive advisory lock on `file`, blocking until it
-/// is available. Uses the same flock-then-fcntl strategy as
+/// Acquire an exclusive advisory lock on `file`, blocking until it is
+/// available. Uses the same flock-then-fcntl strategy as
 /// [`try_lock_exclusive`].
 pub fn lock_exclusive_blocking(file: &File) -> io::Result<()> {
     match file.lock() {
         Ok(()) => Ok(()),
-        Err(err) if is_lock_unsupported(&err) => {
-            lock_exclusive_blocking_fcntl(file)
-        }
+        Err(err) if is_lock_unsupported(&err) => fcntl_blocking_exclusive(file),
         Err(err) => Err(err),
     }
 }
 
 #[cfg(unix)]
-fn lock_exclusive_blocking_fcntl(file: &File) -> io::Result<()> {
-    use rustix::fs::FlockOperation;
+fn fcntl_blocking_exclusive(file: &File) -> io::Result<()> {
     use std::os::unix::io::AsFd;
-    // Blocking fcntl exclusive lock (F_SETLKW): retry on interrupt.
-    loop {
-        match rustix::fs::fcntl_lock(file.as_fd(), FlockOperation::LockExclusive) {
-            Ok(()) => return Ok(()),
-            Err(rustix::io::Errno::INTR) => continue,
-            Err(errno) => return Err(io::Error::from(errno)),
-        }
-    }
+    fcntl_blocking_lock(file.as_fd(), rustix::fs::FlockOperation::LockExclusive)
 }
 
 #[cfg(not(unix))]
-fn lock_exclusive_blocking_fcntl(_file: &File) -> io::Result<()> {
+fn fcntl_blocking_exclusive(_file: &File) -> io::Result<()> {
+    Err(io::Error::new(
+        io::ErrorKind::Unsupported,
+        "fcntl file locking is only supported on unix",
+    ))
+}
+
+/// Acquire a shared advisory lock on `file`, blocking until it is available.
+/// Uses the same flock-then-fcntl strategy as [`lock_exclusive_blocking`].
+pub fn lock_shared_blocking(file: &File) -> io::Result<()> {
+    match file.lock_shared() {
+        Ok(()) => Ok(()),
+        Err(err) if is_lock_unsupported(&err) => fcntl_blocking_shared(file),
+        Err(err) => Err(err),
+    }
+}
+
+#[cfg(unix)]
+fn fcntl_blocking_shared(file: &File) -> io::Result<()> {
+    use std::os::unix::io::AsFd;
+    fcntl_blocking_lock(file.as_fd(), rustix::fs::FlockOperation::LockShared)
+}
+
+#[cfg(not(unix))]
+fn fcntl_blocking_shared(_file: &File) -> io::Result<()> {
     Err(io::Error::new(
         io::ErrorKind::Unsupported,
         "fcntl file locking is only supported on unix",
@@ -177,25 +146,16 @@ pub fn try_lock_exclusive_fd<Fd: std::os::unix::io::AsFd>(fd: Fd) -> Result<(), 
         Ok(()) => Ok(()),
         Err(rustix::io::Errno::WOULDBLOCK) => Err(TryLockError::WouldBlock),
         Err(rustix::io::Errno::NOSYS) | Err(rustix::io::Errno::NOTSUP) => {
-            rustix::fs::fcntl_lock(fd.as_fd(), FlockOperation::NonBlockingLockExclusive).map_err(
-                |errno| {
-                    let err = std::io::Error::from(errno);
-                    if err.kind() == std::io::ErrorKind::WouldBlock {
-                        TryLockError::WouldBlock
-                    } else {
-                        TryLockError::Error(err)
-                    }
-                },
-            )
+            fcntl_try_lock(fd, FlockOperation::NonBlockingLockExclusive)
         }
-        Err(errno) => Err(TryLockError::Error(std::io::Error::from(errno))),
+        Err(errno) => Err(TryLockError::Error(io::Error::from(errno))),
     }
 }
 
 #[cfg(not(unix))]
 pub fn try_lock_exclusive_fd<Fd>(_fd: Fd) -> Result<(), TryLockError> {
-    Err(TryLockError::Error(std::io::Error::new(
-        std::io::ErrorKind::Unsupported,
+    Err(TryLockError::Error(io::Error::new(
+        io::ErrorKind::Unsupported,
         "fd file locking is only supported on unix",
     )))
 }
@@ -218,3 +178,100 @@ pub fn unlock(file: &File) -> io::Result<()> {
         Err(err) => Err(err),
     }
 }
+
+fn is_lock_unsupported(err: &io::Error) -> bool {
+    matches!(
+        err.raw_os_error(),
+        Some(code) if code == libc_enosys() || code == libc_eopnotsupp() || code == libc_enolck()
+    ) || err.kind() == io::ErrorKind::Unsupported
+}
+
+#[cfg(unix)]
+fn libc_enosys() -> i32 {
+    // ENOSYS value is stable across Linux/Android/libc targets.
+    38
+}
+
+#[cfg(unix)]
+fn libc_eopnotsupp() -> i32 {
+    // EOPNOTSUPP value is stable across Linux/Android/libc targets.
+    95
+}
+
+#[cfg(unix)]
+fn libc_enolck() -> i32 {
+    // ENOLCK value is stable across Linux/Android/libc targets.
+    37
+}
+
+#[cfg(not(unix))]
+fn libc_enosys() -> i32 {
+    -1
+}
+
+#[cfg(not(unix))]
+fn libc_eopnotsupp() -> i32 {
+    -1
+}
+
+#[cfg(not(unix))]
+fn libc_enolck() -> i32 {
+    -1
+}
+
+/// Warn once per process when the filesystem supports no advisory locking at
+/// all; callers then proceed without the lock instead of failing.
+fn warn_locking_unsupported_once() {
+    static WARNED: OnceLock<()> = OnceLock::new();
+    if WARNED.set(()).is_ok() {
+        tracing::warn!(
+            "advisory file locking is unsupported on this filesystem; \
+             proceeding without cross-process locks"
+        );
+    }
+}
+
+/// Non-blocking `fcntl` try-lock. Maps contention (`EAGAIN`/`EACCES`) to
+/// [`TryLockError::WouldBlock`] and treats "unsupported by filesystem" as
+/// success (after warning once).
+#[cfg(unix)]
+fn fcntl_try_lock<Fd: std::os::unix::io::AsFd>(
+    fd: Fd,
+    operation: rustix::fs::FlockOperation,
+) -> Result<(), TryLockError> {
+    use rustix::io::Errno;
+    match rustix::fs::fcntl_lock(fd.as_fd(), operation) {
+        Ok(()) => Ok(()),
+        Err(Errno::NOSYS | Errno::NOTSUP | Errno::NOLCK) => {
+            warn_locking_unsupported_once();
+            Ok(())
+        }
+        Err(Errno::WOULDBLOCK | Errno::ACCESS) => Err(TryLockError::WouldBlock),
+        Err(errno) => Err(TryLockError::Error(io::Error::from(errno))),
+    }
+}
+
+/// Blocking `fcntl` lock (`F_SETLKW`/`F_SETLKR` semantics): retries on
+/// interrupt and treats "unsupported by filesystem" as success (after
+/// warning once).
+#[cfg(unix)]
+fn fcntl_blocking_lock<Fd: std::os::unix::io::AsFd>(
+    fd: Fd,
+    operation: rustix::fs::FlockOperation,
+) -> io::Result<()> {
+    use rustix::io::Errno;
+    loop {
+        match rustix::fs::fcntl_lock(fd.as_fd(), operation) {
+            Ok(()) => return Ok(()),
+            Err(Errno::INTR) => continue,
+            Err(Errno::NOSYS | Errno::NOTSUP | Errno::NOLCK) => {
+                warn_locking_unsupported_once();
+                return Ok(());
+            }
+            Err(errno) => return Err(io::Error::from(errno)),
+        }
+    }
+}
+
+#[cfg(not(unix))]
+fn warn_locking_unsupported_once() {}

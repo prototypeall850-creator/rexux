@@ -9,6 +9,7 @@ use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 
 use rexux_protocol::ThreadId;
+use rexux_utils_file_lock::{lock_exclusive_blocking, try_lock_exclusive};
 use tracing::warn;
 
 use crate::ThreadStoreError;
@@ -61,7 +62,7 @@ impl WriterLockCoordinator {
                 ),
             })?;
 
-        match file.try_lock() {
+        match try_lock_exclusive(&file) {
             Ok(()) => {}
             Err(std::fs::TryLockError::WouldBlock) => {
                 return Err(ThreadStoreError::Conflict {
@@ -106,7 +107,7 @@ impl WriterLockCoordinator {
                     path.display()
                 ),
             })?;
-        file.lock().map_err(|err| ThreadStoreError::Internal {
+        lock_exclusive_blocking(&file).map_err(|err| ThreadStoreError::Internal {
             message: format!(
                 "failed to acquire thread writer coordination lock {}: {err}",
                 path.display()
@@ -140,7 +141,7 @@ impl WriterLockCoordinator {
                     continue;
                 }
             };
-            match file.try_lock() {
+            match try_lock_exclusive(&file) {
                 Ok(()) => {
                     drop(file);
                     if let Err(err) = fs::remove_file(&path)

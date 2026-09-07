@@ -14,6 +14,7 @@ use std::path::PathBuf;
 use std::time::Duration;
 use std::time::Instant;
 
+use rexux_utils_file_lock::{try_lock_exclusive, try_lock_shared};
 use rexux_utils_home_dir::find_rexux_home;
 
 const OAUTH_LOCK_DIR: &str = "mcp-oauth-locks";
@@ -124,8 +125,8 @@ impl OAuthStoreLock {
 
         loop {
             let result = match mode {
-                OAuthStoreLockMode::Shared => file.try_lock_shared(),
-                OAuthStoreLockMode::Exclusive => file.try_lock(),
+                OAuthStoreLockMode::Shared => try_lock_shared(&file),
+                OAuthStoreLockMode::Exclusive => try_lock_exclusive(&file),
             };
             match result {
                 Ok(()) => return Ok(Self { _file: file }),

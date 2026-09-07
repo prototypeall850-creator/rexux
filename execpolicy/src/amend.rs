@@ -154,9 +154,11 @@ fn append_locked_line(policy_path: &Path, line: &str) -> Result<(), AmendError> 
             path: policy_path.to_path_buf(),
             source,
         })?;
-    file.lock().map_err(|source| AmendError::LockPolicyFile {
-        path: policy_path.to_path_buf(),
-        source,
+    rexux_utils_file_lock::lock_exclusive_blocking(&file).map_err(|source| {
+        AmendError::LockPolicyFile {
+            path: policy_path.to_path_buf(),
+            source,
+        }
     })?;
 
     file.seek(SeekFrom::Start(0))

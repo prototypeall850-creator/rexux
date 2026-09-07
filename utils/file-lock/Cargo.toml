@@ -9,6 +9,7 @@ workspace = true
 
 [dependencies]
 rustix = { workspace = true, features = ["fs"] }
+tracing = { workspace = true }
 
 [lib]
 doctest = false

@@ -81,6 +81,7 @@ rexux-utils-plugins = { workspace = true }
 rexux-utils-pty = { workspace = true }
 rexux-utils-string = { workspace = true }
 rexux-utils-stream-parser = { workspace = true }
+rexux-utils-file-lock = { workspace = true }
 rexux-windows-sandbox = { package = "rexux-windows-sandbox", path = "../windows-sandbox-rs" }
 dirs = { workspace = true }
 dunce = { workspace = true }

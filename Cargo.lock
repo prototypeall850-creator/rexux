@@ -9485,6 +9485,7 @@ dependencies = [
  "rexux-utils-audio",
  "rexux-utils-cache",
  "rexux-utils-cargo-bin",
+ "rexux-utils-file-lock",
  "rexux-utils-git-discovery",
  "rexux-utils-home-dir",
  "rexux-utils-image",
@@ -9761,6 +9762,7 @@ dependencies = [
  "multimap",
  "pretty_assertions",
  "rexux-utils-absolute-path",
+ "rexux-utils-file-lock",
  "serde",
  "serde_json",
  "shlex",
@@ -10184,6 +10186,7 @@ dependencies = [
  "rexux-protocol",
  "rexux-sandboxing",
  "rexux-utils-absolute-path",
+ "rexux-utils-file-lock",
  "rustix",
  "seccompiler",
  "serde",
@@ -11047,6 +11050,7 @@ dependencies = [
  "rexux-rollout",
  "rexux-state",
  "rexux-utils-absolute-path",
+ "rexux-utils-file-lock",
  "rexux-utils-path",
  "rexux-utils-path-uri",
  "serde",
@@ -11284,6 +11288,7 @@ name = "rexux-utils-file-lock"
 version = "0.1.4"
 dependencies = [
  "rustix",
+ "tracing",
 ]
 
 [[package]]

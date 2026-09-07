@@ -29,7 +29,7 @@ pub async fn resolve_installation_id(rexux_home: &AbsolutePathBuf) -> Result<Str
         }
 
         let mut file = options.open(&path)?;
-        file.lock()?;
+        rexux_utils_file_lock::lock_exclusive_blocking(&file)?;
 
         #[cfg(unix)]
         {

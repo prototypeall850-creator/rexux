@@ -16,6 +16,7 @@ workspace = true
 chrono = { workspace = true, features = ["serde"] }
 rexux-app-server-protocol = { workspace = true }
 rexux-extension-items = { workspace = true }
+rexux-utils-file-lock = { workspace = true }
 rexux-git-utils = { workspace = true }
 rexux-install-context = { workspace = true }
 rexux-otel = { workspace = true }

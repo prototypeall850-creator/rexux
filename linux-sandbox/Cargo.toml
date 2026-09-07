@@ -24,6 +24,7 @@ rexux-process-hardening = { workspace = true }
 rexux-protocol = { workspace = true }
 rexux-sandboxing = { workspace = true }
 rexux-utils-absolute-path = { workspace = true }
+rexux-utils-file-lock = { workspace = true }
 globset = { workspace = true }
 landlock = { workspace = true }
 libc = { workspace = true }

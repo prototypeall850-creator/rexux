@@ -1308,7 +1308,7 @@ fn with_synthetic_mount_registry_lock<T>(f: impl FnOnce() -> T) -> T {
                 lock_path.display()
             )
         });
-    if unsafe { libc::flock(lock_file.as_raw_fd(), libc::LOCK_EX) } < 0 {
+    if rexux_utils_file_lock::lock_exclusive_blocking(&lock_file).is_err() {
         let err = std::io::Error::last_os_error();
         panic!(
             "failed to lock synthetic bubblewrap mount registry {}: {err}",
@@ -1316,13 +1316,12 @@ fn with_synthetic_mount_registry_lock<T>(f: impl FnOnce() -> T) -> T {
         );
     }
     let result = f();
-    if unsafe { libc::flock(lock_file.as_raw_fd(), libc::LOCK_UN) } < 0 {
-        let err = std::io::Error::last_os_error();
+    rexux_utils_file_lock::unlock(&lock_file).unwrap_or_else(|err| {
         panic!(
             "failed to unlock synthetic bubblewrap mount registry {}: {err}",
             lock_path.display()
         );
-    }
+    });
     result
 }
 
