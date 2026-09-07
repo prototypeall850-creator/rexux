@@ -28,6 +28,11 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      # rust-toolchain.toml pins channel 1.95.0, which makes the action's
+      # `targets` input unreliable — ensure the Android target is present.
+      - name: ensure Android target installed
+        run: rustup target add ${{ matrix.target }}
+
       - name: install Android NDK
         uses: nttld/setup-ndk@v1
         id: setup-ndk
