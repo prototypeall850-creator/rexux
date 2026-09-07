@@ -1,0 +1,148 @@
+[package]
+name = "rexux-app-server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "rexux-app-server"
+path = "src/main.rs"
+
+[[bin]]
+name = "rexux-app-server-test-notify-capture"
+path = "src/bin/notify_capture.rs"
+
+[[bin]]
+name = "exec-server"
+path = "src/bin/exec_server.rs"
+
+[lib]
+name = "rexux_app_server"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+base64 = { workspace = true }
+axum = { workspace = true, default-features = false, features = [
+    "http1",
+    "json",
+    "tokio",
+    "ws",
+] }
+rexux-analytics = { workspace = true }
+rexux-agent-extension = { workspace = true }
+rexux-arg0 = { workspace = true }
+rexux-aws-auth = { workspace = true }
+rexux-cloud-config = { workspace = true }
+rexux-code-mode = { workspace = true }
+rexux-config = { workspace = true }
+rexux-connectors = { workspace = true }
+rexux-core = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-diagnostics = { workspace = true }
+rexux-home = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-external-agent-migration = { workspace = true }
+rexux-features = { workspace = true }
+rexux-goal-extension = { workspace = true }
+rexux-git-attribution = { workspace = true }
+rexux-guardian-v2 = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-file-watcher = { workspace = true }
+rexux-hooks = { workspace = true }
+rexux-history-notes-extension = { workspace = true }
+rexux-http-client = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-shell-command = { workspace = true }
+rexux-skills = { workspace = true }
+rexux-skills-extension = { workspace = true }
+rexux-utils-cli = { workspace = true }
+rexux-utils-pty = { workspace = true }
+rexux-backend-client = { workspace = true }
+rexux-file-search = { workspace = true }
+rexux-chatgpt = { workspace = true }
+rexux-login = { workspace = true }
+rexux-image-generation-extension = { workspace = true }
+rexux-memories-extension = { workspace = true }
+rexux-web-search-extension = { workspace = true }
+rexux-memories-write = { workspace = true }
+rexux-mcp = { workspace = true }
+rexux-mcp-extension = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-queue-extension = { workspace = true }
+rexux-app-server-protocol = { workspace = true }
+rexux-app-server-transport = { workspace = true }
+rexux-feedback = { workspace = true }
+rexux-rmcp-client = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-sandboxing = { workspace = true }
+rexux-state = { workspace = true }
+rexux-thread-store = { workspace = true }
+rexux-tools = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-json-to-toml = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+futures = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+tempfile = { workspace = true }
+thiserror = { workspace = true }
+time = { workspace = true }
+toml = { workspace = true }
+toml_edit = { workspace = true }
+tokio = { workspace = true, features = [
+    "io-std",
+    "macros",
+    "process",
+    "rt-multi-thread",
+    "signal",
+] }
+tokio-util = { workspace = true }
+tracing = { workspace = true, features = ["log"] }
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt", "json"] }
+url = { workspace = true }
+uuid = { workspace = true, features = ["serde", "v7"] }
+
+[target.'cfg(windows)'.dependencies]
+rexux-windows-sandbox = { workspace = true }
+
+[dev-dependencies]
+app_test_support = { workspace = true }
+axum = { workspace = true, default-features = false, features = [
+    "http1",
+    "json",
+    "tokio",
+] }
+base64 = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+core_test_support = { workspace = true }
+flate2 = { workspace = true }
+hmac = { workspace = true }
+http = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+pretty_assertions = { workspace = true }
+rmcp = { workspace = true, default-features = false, features = [
+    "elicitation",
+    "server",
+    "transport-streamable-http-server",
+] }
+serial_test = { workspace = true }
+shlex = { workspace = true }
+tar = { workspace = true }
+test-case = "3.3.1"
+tokio-tungstenite = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+wiremock = { workspace = true }

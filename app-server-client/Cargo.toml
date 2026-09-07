@@ -1,0 +1,40 @@
+[package]
+name = "rexux-app-server-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "rexux_app_server_client"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-app-server = { workspace = true }
+rexux-app-server-protocol = { workspace = true }
+rexux-arg0 = { workspace = true }
+rexux-config = { workspace = true }
+rexux-core = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-feedback = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-uds = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-rustls-provider = { workspace = true }
+futures = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["sync", "time", "rt"] }
+tokio-tungstenite = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+serde_json = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

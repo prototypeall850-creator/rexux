@@ -1,0 +1,52 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-rollout"
+version.workspace = true
+
+[lib]
+doctest = false
+name = "rexux_rollout"
+path = "src/lib.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true, features = ["serde"] }
+rexux-extension-items = { workspace = true }
+rexux-file-search = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-history = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-state = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tempfile = { workspace = true }
+time = { workspace = true, features = [
+    "formatting",
+    "local-offset",
+    "macros",
+    "parsing",
+] }
+tokio = { workspace = true, features = [
+    "fs",
+    "io-util",
+    "macros",
+    "process",
+    "rt",
+    "sync",
+    "time",
+] }
+tracing = { workspace = true }
+uuid = { workspace = true }
+zstd = { workspace = true }
+
+[dev-dependencies]
+rexux-utils-absolute-path = { workspace = true }
+pretty_assertions = { workspace = true }

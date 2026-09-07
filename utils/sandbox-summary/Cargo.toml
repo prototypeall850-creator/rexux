@@ -1,0 +1,19 @@
+[package]
+name = "rexux-utils-sandbox-summary"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-protocol = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+
+[dev-dependencies]
+rexux-utils-absolute-path = { workspace = true }
+pretty_assertions = { workspace = true }
+
+[lib]
+doctest = false

@@ -1,0 +1,20 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-guardian-context"
+version.workspace = true
+
+[lib]
+doctest = false
+name = "rexux_guardian_context"
+path = "src/lib.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-protocol = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

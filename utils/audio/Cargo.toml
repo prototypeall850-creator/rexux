@@ -1,0 +1,23 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-utils-audio"
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+base64 = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-utils-cache = { workspace = true }
+rexux-utils-string = { workspace = true }
+symphonia = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+
+[lib]
+doctest = false

@@ -1,0 +1,53 @@
+[package]
+name = "rexux-login"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+base64 = { workspace = true }
+chrono = { workspace = true, features = ["serde"] }
+rexux-agent-identity = { workspace = true }
+rexux-http-client = { workspace = true }
+rexux-config = { workspace = true }
+rexux-keyring-store = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-secrets = { workspace = true }
+rexux-terminal-detection = { workspace = true }
+rexux-workload-identity = { workspace = true }
+http = { workspace = true }
+once_cell = { workspace = true }
+os_info = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, features = [
+    "io-std",
+    "macros",
+    "process",
+    "rt-multi-thread",
+    "signal",
+] }
+tracing = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+core_test_support = { workspace = true }
+jsonwebtoken = { workspace = true }
+pretty_assertions = { workspace = true }
+regex-lite = { workspace = true }
+serial_test = { workspace = true }
+tiny_http = { workspace = true }
+tempfile = { workspace = true }
+tracing-subscriber = { workspace = true }
+wiremock = { workspace = true }
+
+[lib]
+doctest = false

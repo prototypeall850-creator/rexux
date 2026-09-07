@@ -1,0 +1,35 @@
+[package]
+name = "rexux-arg0"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "rexux_arg0"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+rexux-apply-patch = { workspace = true }
+rexux-async-utils = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-linux-sandbox = { workspace = true }
+rexux-sandboxing = { workspace = true }
+rexux-shell-escalation = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-home-dir = { workspace = true }
+dotenvy = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["rt-multi-thread"] }
+
+[target.'cfg(windows)'.dependencies]
+rexux-windows-sandbox = { workspace = true }
+pathdiff = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

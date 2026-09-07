@@ -1,0 +1,47 @@
+[package]
+name = "rexux-sandboxing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "rexux_sandboxing"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+# This direct dependency pins MXC's transitive ETW dependency for Windows GNU linking.
+[package.metadata.cargo-shear]
+ignored = ["tracelogging"]
+
+[dependencies]
+anyhow = { workspace = true }
+rexux-network-proxy = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+rexux-utils-pty = { workspace = true }
+rexux-windows-sandbox = { workspace = true }
+dunce = { workspace = true }
+libc = { workspace = true }
+serde_json = { workspace = true }
+regex-lite = { workspace = true }
+tokio = { workspace = true, features = ["rt", "sync"] }
+tracing = { workspace = true, features = ["log"] }
+url = { workspace = true }
+which = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+appcontainer_common = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-utils-home-dir = { workspace = true }
+# 1.2.4 imports OneCore_apiset, which the GNU Windows toolchain does not ship.
+tracelogging = "=1.2.3"
+
+[dev-dependencies]
+anyhow = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt", "time"] }

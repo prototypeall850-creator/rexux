@@ -1,0 +1,22 @@
+[package]
+name = "rexux-realtime-webrtc"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-utils-pty = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["sync", "time"] }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

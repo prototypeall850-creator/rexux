@@ -1,0 +1,29 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-extension-api"
+version.workspace = true
+
+[lib]
+name = "rexux_extension_api"
+path = "src/lib.rs"
+test = false
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-config = { workspace = true }
+rexux-context-fragments = { workspace = true }
+rexux-exec-server-protocol = { workspace = true }
+rexux-mcp = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-tools = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

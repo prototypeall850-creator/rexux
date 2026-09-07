@@ -1,0 +1,24 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-connectors-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_connectors_extension"
+path = "src/lib.rs"
+doctest = false
+test = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-connectors = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-file-system = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

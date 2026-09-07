@@ -1,0 +1,21 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-memories-read"
+version.workspace = true
+
+[lib]
+name = "rexux_memories_read"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-protocol = { workspace = true }
+rexux-shell-command = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

@@ -1,0 +1,43 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-mcp-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_mcp_extension"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+rexux-core = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-config = { workspace = true }
+rexux-connectors = { workspace = true }
+rexux-connectors-extension = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-features = { workspace = true }
+rexux-mcp = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true, features = ["sync"] }
+
+[dev-dependencies]
+axum = { workspace = true }
+rexux-exec-server-test-support = { workspace = true }
+rexux-login = { workspace = true }
+futures = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+tokio-util = { workspace = true, features = ["rt"] }

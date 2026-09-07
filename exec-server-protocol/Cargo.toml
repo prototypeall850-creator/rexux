@@ -1,0 +1,26 @@
+[package]
+name = "rexux-exec-server-protocol"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "rexux_exec_server_protocol"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+base64 = { workspace = true }
+rexux-file-system = { workspace = true }
+rexux-network-proxy = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-shell-command = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["arbitrary_precision", "raw_value"] }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

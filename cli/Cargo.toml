@@ -1,0 +1,131 @@
+[package]
+name = "rexux-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+build = "build.rs"
+default-run = "rexux"
+
+[[bin]]
+name = "rexux"
+path = "src/main.rs"
+
+[[bin]]
+name = "logs_client"
+path = "src/bin/logs_client.rs"
+
+[lib]
+name = "rexux_cli"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true, features = ["derive", "env"] }
+clap_complete = { workspace = true }
+rexux-app-server = { workspace = true }
+rexux-app-server-daemon = { workspace = true }
+rexux-app-server-protocol = { workspace = true }
+rexux-app-server-test-client = { workspace = true }
+rexux-arg0 = { workspace = true }
+rexux-api = { workspace = true }
+rexux-chatgpt = { workspace = true }
+rexux-cloud-config = { workspace = true }
+rexux-cloud-tasks = { path = "../cloud-tasks" }
+rexux-utils-cli = { workspace = true }
+rexux-config = { workspace = true }
+rexux-core = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-history = { workspace = true }
+rexux-home = { workspace = true }
+rexux-http-client = { workspace = true }
+rexux-exec = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-execpolicy = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-features = { workspace = true }
+rexux-git-attribution = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-login = { workspace = true }
+rexux-memories-write = { workspace = true }
+rexux-mcp = { workspace = true }
+rexux-mcp-server = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-responses-api-proxy = { workspace = true }
+rexux-rmcp-client = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-rollout-trace = { workspace = true }
+rexux-sandboxing = { workspace = true }
+rexux-skills-extension = { workspace = true }
+rexux-state = { workspace = true }
+rexux-stdio-to-uds = { workspace = true }
+rexux-terminal-detection = { workspace = true }
+rexux-thread-store = { workspace = true }
+rexux-tui = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path = { workspace = true }
+crossterm = { workspace = true }
+http = { workspace = true }
+libc = { workspace = true }
+os_info = { workspace = true }
+owo-colors = { workspace = true }
+regex-lite = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+supports-color = { workspace = true }
+sys-locale = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = [
+    "io-std",
+    "macros",
+    "net",
+    "process",
+    "rt-multi-thread",
+    "signal",
+    "time",
+] }
+toml = { workspace = true }
+tracing = { workspace = true }
+tracing-appender = { workspace = true }
+tracing-subscriber = { workspace = true }
+unicode-segmentation = { workspace = true }
+url = { workspace = true }
+which = { workspace = true }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+rexux_windows_sandbox = { package = "rexux-windows-sandbox", path = "../windows-sandbox-rs" }
+windows-sys = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_Storage_Packaging_Appx",
+    "Win32_System_Console",
+    "Win32_System_Threading",
+] }
+
+[dev-dependencies]
+app_test_support = { workspace = true }
+assert_cmd = { workspace = true }
+assert_matches = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+flate2 = { workspace = true }
+futures = { workspace = true }
+insta = { workspace = true }
+predicates = { workspace = true }
+pretty_assertions = { workspace = true }
+sqlx = { workspace = true }
+tar = { workspace = true }
+tokio-tungstenite = { workspace = true }
+wiremock = { workspace = true }
+zstd = { workspace = true }
+
+[package.metadata.cargo-shear]
+# These Rust sources are intentionally Bazel-only macrobenchmarks rather than
+# Cargo targets.
+ignored-paths = ["e2e_benches/*.rs"]

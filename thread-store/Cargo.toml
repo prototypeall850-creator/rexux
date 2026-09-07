@@ -1,0 +1,43 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-thread-store"
+version.workspace = true
+
+[lib]
+name = "rexux_thread_store"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+chrono = { workspace = true, features = ["serde"] }
+rexux-app-server-protocol = { workspace = true }
+rexux-extension-items = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-state = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+futures = { workspace = true }
+pulldown-cmark = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sqlx = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+zstd = { workspace = true }
+
+[dev-dependencies]
+rexux-utils-absolute-path = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }
+uuid = { workspace = true }

@@ -1,0 +1,42 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-guardian-v2"
+version.workspace = true
+
+[lib]
+name = "rexux_guardian_v2"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-analytics = { workspace = true }
+rexux-api = { workspace = true }
+rexux-core = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-features = { workspace = true }
+rexux-guardian-context = { workspace = true }
+rexux-history = { workspace = true }
+rexux-http-client = { workspace = true }
+rexux-login = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-network-proxy = { workspace = true }
+rexux-protocol = { workspace = true }
+dirs = { workspace = true }
+http = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, features = ["time"] }
+tracing = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+core_test_support = { workspace = true }
+pretty_assertions = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

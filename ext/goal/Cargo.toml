@@ -1,0 +1,37 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-goal-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_goal_extension"
+path = "src/lib.rs"
+test = false
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-analytics = { workspace = true }
+rexux-core = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-state = { workspace = true }
+rexux-tools = { workspace = true }
+rexux-utils-template = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["sync"] }
+tracing = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

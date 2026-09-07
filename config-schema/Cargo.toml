@@ -1,0 +1,17 @@
+[package]
+name = "rexux-config-schema"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "rexux-write-config-schema"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+rexux-config = { workspace = true }

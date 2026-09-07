@@ -1,0 +1,32 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-web-search-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_web_search_extension"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-api = { workspace = true }
+rexux-core = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-extension-items = { workspace = true }
+rexux-login = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-tools = { workspace = true }
+http = { workspace = true }
+schemars = { workspace = true }
+serde_json = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

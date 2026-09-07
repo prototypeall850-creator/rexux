@@ -1,0 +1,49 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-memories-write"
+version.workspace = true
+
+[lib]
+name = "rexux_memories_write"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true }
+rexux-backend-client = { workspace = true }
+rexux-core = { workspace = true }
+rexux-config = { workspace = true }
+rexux-features = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-login = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-rollout-trace = { workspace = true }
+rexux-secrets = { workspace = true }
+rexux-state = { workspace = true }
+rexux-terminal-detection = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-output-truncation = { workspace = true }
+rexux-utils-template = { workspace = true }
+futures = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["fs", "rt", "sync", "time"] }
+tracing = { workspace = true, features = ["log"] }
+uuid = { workspace = true, features = ["v4", "v5"] }
+
+[dev-dependencies]
+rexux-model-provider-info = { workspace = true }
+rexux-models-manager = { workspace = true }
+core_test_support = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["fs", "macros"] }
+wiremock = { workspace = true }

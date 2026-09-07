@@ -1,0 +1,15 @@
+---
+source: tui/src/model_migration.rs
+expression: terminal.backend()
+---
+
+> Rexux just got an upgrade. Introducing gpt-5.1-rexux-mini.
+
+  We recommend switching from gpt-5-rexux-mini to
+  gpt-5.1-rexux-mini.
+
+  Optimized for rexux. Cheaper, faster, but less capable.
+  Learn more about gpt-5.1-rexux-mini at
+  https://www.rexux.com/models/gpt-5.1-rexux-mini
+
+  Press enter to continue

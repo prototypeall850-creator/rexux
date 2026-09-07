@@ -1,0 +1,55 @@
+[package]
+name = "core_test_support"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+assert_cmd = { workspace = true }
+base64 = { workspace = true }
+rexux-arg0 = { workspace = true }
+rexux-config = { workspace = true }
+rexux-core = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-home = { workspace = true }
+rexux-features = { workspace = true }
+rexux-hooks = { workspace = true }
+rexux-login = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-thread-store = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+ctor = { workspace = true }
+futures = { workspace = true }
+notify = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+regex-lite = { workspace = true }
+serde_json = { workspace = true }
+similar = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["net", "test-util", "time"] }
+tokio-tungstenite = { workspace = true }
+tracing = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+tracing-subscriber = { workspace = true }
+walkdir = { workspace = true }
+wiremock = { workspace = true }
+shlex = { workspace = true }
+zstd = { workspace = true }
+
+[dev-dependencies]
+rexux-http-client = { workspace = true }
+pretty_assertions = { workspace = true }

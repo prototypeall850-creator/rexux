@@ -1,0 +1,31 @@
+[package]
+name = "rexux-app-server-test-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive", "env"] }
+rexux-app-server-protocol = { workspace = true }
+rexux-core = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-utils-cli = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["rt"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tungstenite = { workspace = true }
+url = { workspace = true }
+uuid = { workspace = true, features = ["v4"] }
+
+[lib]
+doctest = false
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }

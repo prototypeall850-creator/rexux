@@ -1,0 +1,9 @@
+---
+source: tui/src/app/thread_goal_actions.rs
+expression: terminal.backend()
+---
+
+
+■ Goals need a saved session. This session is temporary.
+Run `rexux` to start a saved session, or `rexux resume` / `/resume` to
+reopen one.

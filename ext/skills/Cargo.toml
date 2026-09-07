@@ -1,0 +1,49 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-skills-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_skills_extension"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-analytics = { workspace = true }
+rexux-config = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-mcp = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-skills = { workspace = true }
+rexux-tools = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+rexux-utils-plugins = { workspace = true }
+rexux-utils-string = { workspace = true }
+dirs = { workspace = true }
+futures = { workspace = true }
+schemars = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+tokio = { workspace = true, features = ["sync", "time"] }
+toml = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+assert_matches = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+dunce = { workspace = true }
+insta = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

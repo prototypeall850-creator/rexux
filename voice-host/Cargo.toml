@@ -1,0 +1,24 @@
+[package]
+name = "rexux-voice-host"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "rexux-voice-host"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+rexux-process-hardening = { workspace = true }
+rexux-realtime-webrtc = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["io-util", "macros", "process", "rt-multi-thread", "time"] }

@@ -1,0 +1,167 @@
+[package]
+name = "rexux-tui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+autobins = false
+
+[[bin]]
+name = "rexux-tui"
+path = "src/main.rs"
+
+[[bin]]
+name = "md-events"
+path = "src/bin/md-events.rs"
+
+[lib]
+name = "rexux_tui"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+axum = { workspace = true, default-features = false, features = ["http1", "tokio"] }
+base64 = { workspace = true }
+chrono = { workspace = true, features = ["serde"] }
+clap = { workspace = true, features = ["derive"] }
+rexux-ansi-escape = { workspace = true }
+rexux-app-server-client = { workspace = true }
+rexux-app-server-protocol = { workspace = true }
+rexux-arg0 = { workspace = true }
+rexux-install-context = { workspace = true }
+rexux-cloud-config = { workspace = true }
+rexux-config = { workspace = true }
+rexux-connectors = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-history = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-features = { workspace = true }
+rexux-feedback = { workspace = true }
+rexux-file-search = { workspace = true }
+rexux-git-utils = { workspace = true }
+rexux-http-client = { workspace = true }
+rexux-login = { workspace = true }
+rexux-message-history = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-models-manager = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-sandboxing = { workspace = true }
+rexux-shell-command = { workspace = true }
+rexux-state = { workspace = true }
+rexux-terminal-detection = { workspace = true }
+rexux-utils-approval-presets = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-cli = { workspace = true }
+rexux-utils-elapsed = { workspace = true }
+rexux-utils-fuzzy-match = { workspace = true }
+rexux-utils-home-dir = { workspace = true }
+rexux-utils-oss = { workspace = true }
+rexux-utils-path = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+rexux-utils-plugins = { workspace = true }
+rexux-utils-sandbox-summary = { workspace = true }
+rexux-utils-sleep-inhibitor = { workspace = true }
+rexux-utils-string = { workspace = true }
+color-eyre = { workspace = true }
+crossterm = { workspace = true, features = ["bracketed-paste", "event-stream"] }
+derive_more = { workspace = true, features = ["is_variant"] }
+diffy = { workspace = true }
+dirs = { workspace = true }
+dunce = { workspace = true }
+image = { workspace = true, features = ["jpeg", "png", "gif", "webp"] }
+itertools = { workspace = true }
+lazy_static = { workspace = true }
+pathdiff = { workspace = true }
+pulldown-cmark = { workspace = true }
+rand = { workspace = true }
+ratatui = { workspace = true, features = [
+    "scrolling-regions",
+    "unstable-backend-writer",
+    "unstable-rendered-line-info",
+    "unstable-widget-ref",
+] }
+ratatui-macros = { workspace = true }
+regex-lite = { workspace = true }
+rmcp = { workspace = true, features = ["server", "transport-streamable-http-server"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["preserve_order"] }
+sha2 = { workspace = true }
+shlex = { workspace = true }
+strum = { workspace = true }
+strum_macros = { workspace = true }
+supports-color = { workspace = true }
+tempfile = { workspace = true }
+textwrap = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true, features = [
+    "io-std",
+    "macros",
+    "process",
+    "rt-multi-thread",
+    "signal",
+    "test-util",
+    "time",
+] }
+tokio-stream = { workspace = true, features = ["sync"] }
+toml = { workspace = true }
+tracing = { workspace = true, features = ["log"] }
+tracing-appender = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
+syntect = "5"
+two-face = { version = "0.5", default-features = false, features = ["syntect-default-onig"] }
+unicode-segmentation = { workspace = true }
+unicode-width = { workspace = true }
+url = { workspace = true }
+urlencoding = { workspace = true }
+webbrowser = { workspace = true }
+uuid = { workspace = true }
+
+rexux-windows-sandbox = { workspace = true }
+tokio-util = { workspace = true, features = ["time"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+which = { workspace = true }
+windows-sys = { version = "0.52", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Console",
+    "Win32_System_IO",
+    "Win32_System_Pipes",
+    "Win32_System_Threading",
+] }
+winsplit = "0.1"
+
+# Clipboard support via `arboard` is not available on Android/Termux.
+# Only include it for non-Android targets so the crate builds on Android.
+[target.'cfg(not(target_os = "android"))'.dependencies]
+arboard = { workspace = true }
+
+
+[dev-dependencies]
+app_test_support = { workspace = true }
+rexux-mcp = { workspace = true }
+core_test_support = { workspace = true }
+rexux-utils-cargo-bin = { workspace = true }
+assert_matches = { workspace = true }
+chrono = { workspace = true, features = ["serde"] }
+futures = { workspace = true }
+http = { workspace = true }
+insta = { workspace = true }
+pretty_assertions = { workspace = true }
+rand = { workspace = true }
+serial_test = { workspace = true }
+tokio-tungstenite = { workspace = true }
+vt100 = { workspace = true }
+uuid = { workspace = true }
+wiremock = { workspace = true }

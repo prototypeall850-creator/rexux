@@ -1,0 +1,42 @@
+[package]
+name = "rexux-external-agent-migration"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+doctest = false
+name = "rexux_external_agent_migration"
+path = "src/lib.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+chrono = { workspace = true }
+rexux-analytics = { workspace = true }
+rexux-config = { workspace = true }
+rexux-core = { workspace = true }
+rexux-core-plugins = { workspace = true }
+rexux-hooks = { workspace = true }
+rexux-login = { workspace = true }
+rexux-memories-write = { workspace = true }
+rexux-otel = { workspace = true }
+rexux-plugin = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-rollout = { workspace = true }
+rexux-thread-store = { workspace = true }
+rexux-utils-output-truncation = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+sha2 = { workspace = true }
+toml = { workspace = true }
+tokio = { workspace = true, features = ["rt", "sync"] }
+tracing = { workspace = true }
+
+[dev-dependencies]
+rexux-app-server-protocol = { workspace = true }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread"] }

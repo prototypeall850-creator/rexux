@@ -1,0 +1,38 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-image-generation-extension"
+version.workspace = true
+
+[lib]
+name = "rexux_image_generation_extension"
+path = "src/lib.rs"
+doctest = false
+
+[lints]
+workspace = true
+
+[dependencies]
+base64 = { workspace = true }
+rexux-api = { workspace = true }
+rexux-core = { workspace = true }
+rexux-exec-server = { workspace = true }
+rexux-extension-api = { workspace = true }
+rexux-extension-items = { workspace = true }
+rexux-login = { workspace = true }
+rexux-model-provider = { workspace = true }
+rexux-model-provider-info = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-tools = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-image = { workspace = true }
+rexux-utils-path-uri = { workspace = true }
+http = { workspace = true }
+schemars = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+pretty_assertions = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt"] }

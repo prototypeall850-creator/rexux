@@ -1,0 +1,39 @@
+[package]
+edition.workspace = true
+license.workspace = true
+name = "rexux-tools"
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+bitflags = { workspace = true }
+rexux-code-mode = { workspace = true }
+rexux-connectors = { workspace = true }
+rexux-features = { workspace = true }
+rexux-file-system = { workspace = true }
+rexux-extension-items = { workspace = true }
+rexux-protocol = { workspace = true }
+rexux-utils-absolute-path = { workspace = true }
+rexux-utils-output-truncation = { workspace = true }
+rexux-utils-string = { workspace = true }
+jsonptr = { workspace = true }
+rmcp = { workspace = true, default-features = false, features = [
+    "base64",
+    "macros",
+    "schemars",
+    "server",
+] }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["raw_value"] }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+urlencoding = { workspace = true }
+
+[dev-dependencies]
+rexux-utils-cargo-bin = { workspace = true }
+pretty_assertions = { workspace = true }
+
+[lib]
+doctest = false
