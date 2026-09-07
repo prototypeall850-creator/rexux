@@ -18,8 +18,10 @@ jobs:
         include:
           - target: aarch64-linux-android
             arch: arm64
+            profile: release-termux-thin
           - target: x86_64-linux-android
             arch: x86
+            profile: release-termux
     steps:
       - uses: actions/checkout@v4
 
@@ -67,7 +69,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: build rexux (${{ matrix.target }})
-        run: cargo build --profile release-termux -p rexux-cli --target ${{ matrix.target }}
+        run: cargo build --profile ${{ matrix.profile }} -p rexux-cli --target ${{ matrix.target }}
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
           # Belt and suspenders alongside the PATH shims above.
@@ -80,7 +82,7 @@ jobs:
 
       - name: stage asset
         run: |
-          cp "target/${{ matrix.target }}/release-termux/rexux" \
+          cp "target/${{ matrix.target }}/${{ matrix.profile }}/rexux" \
              "rexux-${{ github.ref_name }}-${{ matrix.target }}"
           chmod +x "rexux-${{ github.ref_name }}-${{ matrix.target }}"
           # Belt and suspenders: strip again with the NDK llvm-strip and report size.

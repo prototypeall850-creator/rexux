@@ -142,7 +142,7 @@ members = [
 resolver = "2"
 
 [workspace.package]
-version = "0.1.1"
+version = "0.1.2"
 # Track the edition for all workspace crates in one place. Individual
 # crates can still override this value, but keeping it here means new
 # crates created with `cargo new -w ...` automatically inherit the 2024
@@ -588,6 +588,15 @@ debug = false
 strip = true
 codegen-units = 1
 opt-level = "z"
+
+# Same as release-termux but with thin LTO + parallel codegen for targets
+# whose CI runners OOM under full LTO (aarch64-linux-android linking needs
+# far more RAM in a single process). Size stays close to release-termux
+# because strip + opt-level "z" are kept.
+[profile.release-termux-thin]
+inherits = "release-termux"
+lto = "thin"
+codegen-units = 4
 
 [profile.profiling]
 inherits = "release"
