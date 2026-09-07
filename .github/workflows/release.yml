@@ -67,7 +67,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: build rexux (${{ matrix.target }})
-        run: cargo build --release -p rexux-cli --target ${{ matrix.target }}
+        run: cargo build --profile release-termux -p rexux-cli --target ${{ matrix.target }}
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
           # Belt and suspenders alongside the PATH shims above.
@@ -80,9 +80,15 @@ jobs:
 
       - name: stage asset
         run: |
-          cp "target/${{ matrix.target }}/release/rexux" \
+          cp "target/${{ matrix.target }}/release-termux/rexux" \
              "rexux-${{ github.ref_name }}-${{ matrix.target }}"
           chmod +x "rexux-${{ github.ref_name }}-${{ matrix.target }}"
+          # Belt and suspenders: strip again with the NDK llvm-strip and report size.
+          "${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" \
+            "rexux-${{ github.ref_name }}-${{ matrix.target }}" || true
+          ls -lh "rexux-${{ github.ref_name }}-${{ matrix.target }}"
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: upload release asset
         uses: softprops/action-gh-release@v2
