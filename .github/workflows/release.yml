@@ -50,6 +50,17 @@ jobs:
           } >> "$GITHUB_WORKSPACE/.cargo-ndk-linkers.toml"
           mkdir -p ~/.cargo
           cat "$GITHUB_WORKSPACE/.cargo-ndk-linkers.toml" >> ~/.cargo/config.toml
+          # C build scripts (aws-lc-sys, ring, openssl-sys via `cc`) look for
+          # plain <target>-clang / <target>-ar on PATH. NDK r27 only ships
+          # API-suffixed wrappers, so expose shims on PATH.
+          BIN_DIR="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          mkdir -p "$GITHUB_WORKSPACE/.ndk-shims"
+          for triple in aarch64-linux-android x86_64-linux-android; do
+            ln -sf "$BIN_DIR/${triple}35-clang" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-clang"
+            ln -sf "$BIN_DIR/${triple}-clang" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-clang++" 2>/dev/null || true
+            ln -sf "$BIN_DIR/llvm-ar" "$GITHUB_WORKSPACE/.ndk-shims/${triple}-ar"
+          done
+          echo "$GITHUB_WORKSPACE/.ndk-shims" >> "$GITHUB_PATH"
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -57,6 +68,13 @@ jobs:
         run: cargo build --release -p rexux-cli --target ${{ matrix.target }}
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          # Belt and suspenders alongside the PATH shims above.
+          CC_aarch64_linux_android: ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android35-clang
+          CC_x86_64_linux_android: ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android35-clang
+          AR_aarch64_linux_android: ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
+          AR_x86_64_linux_android: ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
+          CFLAGS_aarch64_linux_android: --target=aarch64-linux-android35
+          CFLAGS_x86_64_linux_android: --target=x86_64-linux-android35
 
       - name: stage asset
         run: |
